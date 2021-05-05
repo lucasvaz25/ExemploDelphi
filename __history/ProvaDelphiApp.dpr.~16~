@@ -1,0 +1,21 @@
+program ProvaDelphiApp;
+
+uses
+  Vcl.Forms,
+  uFrmPrincipal in 'uFrmPrincipal.pas' {menu},
+  uFBase in 'uFBase.pas' {fBase},
+  fTarefa1 in 'fTarefa1.pas' {fTarefa1},
+  ufTarefa2 in 'ufTarefa2.pas' {fTarefa2},
+  fTarefa3 in 'fTarefa3.pas' {fTarefa3},
+  UMyThread in 'UMyThread.pas';
+
+{$R *.res}
+
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TMenu, Menu);
+  Application.Run;
+
+end.

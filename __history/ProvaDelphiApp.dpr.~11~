@@ -1,0 +1,23 @@
+program ProvaDelphiApp;
+
+uses
+  Vcl.Forms,
+  uFrmPrincipal in 'uFrmPrincipal.pas' {menu},
+  uFBase in 'uFBase.pas' {fBase},
+  fTarefa1 in 'fTarefa1.pas' {fTarefa1},
+  fTarefa2 in 'fTarefa2.pas' {fTarefa2},
+  fTarefa3 in 'fTarefa3.pas' {fTarefa3};
+
+{$R *.res}
+
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TMenu, Menu);
+  Application.CreateForm(TfTarefa1, fTarefa1);
+  Application.CreateForm(TfTarefa2, fTarefa2);
+  Application.CreateForm(TfTarefa3, fTarefa3);
+  Application.Run;
+
+end.

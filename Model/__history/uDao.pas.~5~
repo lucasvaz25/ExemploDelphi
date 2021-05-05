@@ -1,0 +1,28 @@
+unit uDao;
+
+interface
+
+uses
+  Classes,
+  SysUtils,
+  Contnrs;
+
+type
+
+  TDAO = class
+  private
+  protected
+  public
+    constructor Create;
+    destructor Destroy;
+
+    function Insert( var Value: TObject ): Boolean; Virtual;
+    function Update( var Value: TObject ): Boolean; Virtual;
+    function Delete( VID: Integer ): Boolean; Virtual;
+    function Search( Key: string ): TObjectList; virtual;
+    function LoadList: TObjectlist; Virtual;
+  end;
+
+implementation
+
+end.

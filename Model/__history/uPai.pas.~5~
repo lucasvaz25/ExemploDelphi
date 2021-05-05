@@ -1,0 +1,23 @@
+unit uPai;
+
+interface
+
+type
+  Tpai = class
+  private
+    FId: Integer;
+    procedure SetId( const Value: Integer );
+  public
+    property Id: Integer read FId write SetId;
+  end;
+
+implementation
+
+{ Tpai }
+
+procedure Tpai.SetId( const Value: Integer );
+begin
+  FId := Value;
+end;
+
+end.

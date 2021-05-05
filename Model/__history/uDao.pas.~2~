@@ -1,0 +1,27 @@
+unit uDao;
+
+interface
+
+uses
+  Classes,
+  SysUtils;
+
+type
+
+  TDAO = class
+  private
+  protected
+  public
+    constructor Create;
+    destructor Destroy;
+    procedure Free;
+
+    function Insert( var Value: TObject ): Boolean; Virtual;
+    function Update( var Value: TObject ): Boolean; Virtual;
+    function Delete( VID: Integer ): Boolean; Virtual;
+    function Carregar( PPos: Integer ): TObject; Virtual;
+  end;
+
+implementation
+
+end.

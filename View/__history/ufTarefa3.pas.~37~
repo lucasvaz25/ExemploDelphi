@@ -1,0 +1,105 @@
+unit ufTarefa3;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  UFBase,
+  Data.DB,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Datasnap.DBClient,
+  UProjetoController;
+
+type
+  TfTarefa3 = class( TfBase )
+    DBGrid1: TDBGrid;
+    Label1: TLabel;
+    EdTotal: TLabeledEdit;
+    EdTotalDiv: TLabeledEdit;
+    BtnTotal: TButton;
+    BtnTotalDiv: TButton;
+    procedure FormCreate( Sender: TObject );
+    procedure FormShow( Sender: TObject );
+  private
+    { Private declarations }
+    CdsProjeto: TClientDataSet;
+    DsProjeto: TDataSource;
+  public
+    { Public declarations }
+    ProjetoControl: TProjetoController;
+  end;
+
+implementation
+
+uses
+  System.Generics.Collections,
+  UProjeto;
+{$R *.dfm}
+
+
+procedure TfTarefa3.FormCreate( Sender: TObject );
+begin
+  inherited;
+  ProjetoControl := nil;
+  ProjetoControl.GetInstance( ProjetoControl, Self );
+
+  CdsProjeto := TClientDataSet.Create( Self );
+  DsProjeto  := TDataSource.Create( Self );
+
+  CdsProjeto.Close;
+  CdsProjeto.FieldDefs.Clear;
+  CdsProjeto.FieldDefs.Add( 'id', FtInteger );
+  CdsProjeto.FieldDefs.Add( 'nomeprojeto', FtString, 30 );
+  CdsProjeto.FieldDefs.Add( 'valor', FtCurrency );
+  CdsProjeto.CreateDataset;
+
+  DsProjeto.DataSet := CdsProjeto;
+
+  DBGrid1.DataSource                   := DsProjeto;
+  DBGrid1.Columns.Items[ 0 ].FieldName := 'id';
+  DBGrid1.Columns.Items[ 1 ].FieldName := 'nomeprojeto';
+  DBGrid1.Columns.Items[ 2 ].FieldName := 'valor';
+
+  CdsProjeto.Active := True;
+  CdsProjeto.DisableControls;
+  CdsProjeto.Open;
+end;
+
+procedure TfTarefa3.FormShow( Sender: TObject );
+var
+  List: TListaProjeto;
+  I: Integer;
+begin
+  inherited;
+  CdsProjeto.EmptyDataSet;
+  List := ProjetoControl.LoadList;
+
+  if List <> nil then
+    if List.Count > 0 then
+    begin
+      for I := 0 to List.Count - 1 do
+      begin
+        CdsProjeto.Append;
+
+        CdsProjeto.FieldByName( 'id' ).AsInteger         := List[ I ].Id;
+        CdsProjeto.FieldByName( 'nomeprojeto' ).AsString := List[ I ].Nome;
+        CdsProjeto.FieldByName( 'valor' ).AsCurrency     := List[ I ].Valor;
+
+        CdsProjeto.Post;
+      end;
+      CdsProjeto.EnableControls;
+    end;
+end;
+
+end.

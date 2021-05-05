@@ -1,0 +1,6 @@
+inherited fTarefa1: TfTarefa1
+  Caption = 'fTarefa1'
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+end

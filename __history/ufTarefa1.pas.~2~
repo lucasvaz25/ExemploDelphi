@@ -1,0 +1,42 @@
+unit ufTarefa1;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  UFBase;
+
+type
+  TfTarefa1 = class( TfBase )
+    procedure FormCreate( Sender: TObject );
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FTarefa1: TfTarefa1;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TfTarefa1.FormCreate( Sender: TObject );
+begin
+
+  if Assigned( Self ) then
+    Self.BringToFront;
+  inherited;
+end;
+
+end.
